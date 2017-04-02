@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :photo do
-    image "MyString"
+    image "MyString.png"
     description "MyText"
     title "MyString"
+    page_id { create(:page).id }
   end
 end
