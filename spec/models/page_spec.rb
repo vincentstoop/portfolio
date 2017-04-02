@@ -61,5 +61,15 @@ RSpec.describe Page, type: :model do
         expect(page).to be_valid
       end
     end
+
+    describe "admin" do
+      let(:admin) { create(:admin) }
+      let(:page) { build(:page, admin_id: admin.id) }
+      it "must be present" do
+        expect(page).to be_valid
+        page.admin_id = ''
+        expect(page).not_to be_valid
+      end
+    end
   end
 end
