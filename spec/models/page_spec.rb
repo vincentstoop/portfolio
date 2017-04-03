@@ -36,28 +36,26 @@ RSpec.describe Page, type: :model do
         expect(page).to be_valid
       end
 
-      it "can only have extensions 'jpg, jpeg, png'" do
-        page.image = 'public/project.jpg'
-        expect(page).to be_valid
-        page.image = 'public/project.jpeg'
-        expect(page).to be_valid
-        page.image = 'public/project.png'
-        expect(page).to be_valid
-        page.image = 'public/project.somethingelse'
-        expect(page).not_to be_valid
-      end
     end
   end
 
   describe "associations" do
-    describe "images" do
+    describe "photos" do
       let(:page) { build(:page)}
+      it "can be zero" do
+        expect(page).to be_valid
+      end
+
+      let(:photo1) { build(:photo, page_id: page.id) }
+      let(:photo2) { build(:photo, page_id: page.id) }
+
       it "can be one" do
+        page.photos = [photo1]
         expect(page).to be_valid
       end
 
       it "can be more than one" do
-        page.image = ['public/project.jpg', 'public/project.png']
+        page.photos = [photo1, photo2]
         expect(page).to be_valid
       end
     end
