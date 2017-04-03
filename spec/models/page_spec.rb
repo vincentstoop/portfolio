@@ -29,14 +29,6 @@ RSpec.describe Page, type: :model do
         expect(page).not_to be_valid
       end
     end
-
-    describe "image" do
-      let(:page) { build(:page, image: '')}
-      it "can be empty" do
-        expect(page).to be_valid
-      end
-
-    end
   end
 
   describe "associations" do
