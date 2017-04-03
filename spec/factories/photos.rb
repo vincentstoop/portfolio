@@ -1,6 +1,8 @@
 FactoryGirl.define do
+  image_src = File.join(Rails.root, 'spec', 'support', 'images', 'project.jpg')
+  src_file = File.new(image_src)
   factory :photo do
-    image "MyString.png"
+    image src_file
     description "MyText"
     title "MyString"
     page_id { create(:page).id }
