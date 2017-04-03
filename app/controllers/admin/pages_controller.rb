@@ -1,4 +1,6 @@
 class Admin::PagesController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @pages = Page.all
   end
@@ -8,15 +10,17 @@ class Admin::PagesController < ApplicationController
   end
 
   def new
+    @page_title = "Add Page"
     @page = Page.new
   end
 
   def create
     @page = Page.new(page_params)
+    @page.admin = current_admin
 
     if @page.save
-      flash[:notice] = "Pagina is opgeslagen."
-      redirect_to admin_pages_path
+      flash[:notice] = "Page saved."
+      redirect_to admin_page_path(@page)
     else
       render :new
     end

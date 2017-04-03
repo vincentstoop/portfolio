@@ -64,7 +64,7 @@ RSpec.describe Admin::PagesController, type: :controller do
 
     it "deletes the Page from database" do
       page.touch
-      
+
       expect { delete :destroy, params: { id: page.id } }
         .to change { Page.count }
         .by(-1)

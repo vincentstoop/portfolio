@@ -97,3 +97,15 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def log_in_as(user, options = {})
+  visit new_admin_session_path
+  fill_in "admin_email", with: user.email
+  fill_in "admin_password", with: user.password
+  click_button "Log in"
+end
+private
+  # Returns true inside an integration test.
+  def integration_test?
+    defined?(post_via_redirect)
+  end

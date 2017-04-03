@@ -1,2 +1,17 @@
-<h1>Admin::Pages#new</h1>
-<p>Find me in app/views/admin/pages/new.html.erb</p>
+<% provide(:title, @page_title) %>
+<h1><%= @page_title %></h1>
+
+<%= form_for [:admin, @page] do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+
+  <%= f.label :portfolio_item do %>
+    <%= f.check_box :portfolio_item %>
+  <% end  %>
+
+  <%= f.submit "Save" %>
+
+<% end %>
