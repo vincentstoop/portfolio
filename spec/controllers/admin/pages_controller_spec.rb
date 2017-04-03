@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::PagesController, type: :controller do
   let(:page) { create(:page, title: 'Test PagesController') }
-  let(:admin) { create(:admin) }
+  let(:admin) { page.admin }
 
   describe "GET #index" do
     it "shows the index page" do
@@ -52,6 +52,22 @@ RSpec.describe Admin::PagesController, type: :controller do
       expect(response).to redirect_to(admin_page_path(page))
       expect(flash[:notice]).not_to be_empty
       expect(assigns(:page).title).to eq('Update PagesController')
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "redirects to admin pages path" do
+      delete :destroy, params: { id: page.id }
+      expect(response).to redirect_to(admin_pages_path)
+      expect(flash[:notice]).not_to be_empty
+    end
+
+    it "deletes the Page from database" do
+      page.touch
+      
+      expect { delete :destroy, params: { id: page.id } }
+        .to change { Page.count }
+        .by(-1)
     end
   end
 

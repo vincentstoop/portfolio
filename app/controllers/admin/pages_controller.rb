@@ -38,6 +38,11 @@ class Admin::PagesController < ApplicationController
   end
 
   def destroy
+    @page = Page.find(params[:id])
+    if @page.destroy
+      flash[:notice] = "Pagina is verwijderd"
+      redirect_to admin_pages_path
+    end
   end
 
   private
