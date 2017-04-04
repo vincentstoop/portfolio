@@ -1,0 +1,14 @@
+<%= form_for [:admin, @page] do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+
+  <%= f.label :portfolio_item do %>
+    <%= f.check_box :portfolio_item %>
+  <% end  %>
+
+  <%= f.submit "Save" %>
+
+<% end %>
