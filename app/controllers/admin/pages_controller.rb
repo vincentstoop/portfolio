@@ -2,7 +2,9 @@ class Admin::PagesController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @pages = Page.all
+    @page_title = "All Pages"
+    @pages = Page.where(portfolio_item: false)
+    @portfolio_items = Page.where(portfolio_item: true)
   end
 
   def show
@@ -22,6 +24,7 @@ class Admin::PagesController < ApplicationController
       flash[:notice] = "Page saved."
       redirect_to admin_page_path(@page)
     else
+      @page_title = "Add Page"
       render :new
     end
   end
@@ -34,7 +37,7 @@ class Admin::PagesController < ApplicationController
     @page = Page.find(params[:id])
 
     if @page.update_attributes(page_params)
-      flash[:notice] = "Paginawijziging is opgeslagen."
+      flash[:notice] = "Page updated."
       redirect_to admin_page_path(@page)
     else
       render :edit
@@ -43,6 +46,7 @@ class Admin::PagesController < ApplicationController
 
   def destroy
     @page = Page.find(params[:id])
+
     if @page.destroy
       flash[:notice] = "Pagina is verwijderd"
       redirect_to admin_pages_path
@@ -54,4 +58,5 @@ class Admin::PagesController < ApplicationController
     def page_params
       params.require(:page).permit(:title, :body, :portfolio_item, :admin_id)
     end
+
 end
