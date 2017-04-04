@@ -4,6 +4,12 @@ RSpec.describe Admin::PagesController, type: :controller do
   let(:page) { create(:page, title: 'Test PagesController') }
   let(:admin) { page.admin }
 
+  before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:admin2]
+    admin2 = page.admin
+    sign_in admin2, scope: :admin # sign_in(scope, resource)
+  end
+
   describe "GET #index" do
     it "shows the index page" do
       get :index
@@ -40,7 +46,7 @@ RSpec.describe Admin::PagesController, type: :controller do
   describe "POST #create" do
     it "creates a page" do
       post :create, params: { page: { title: "Page creation", body: "This is a test body", portfolio_item: true, admin_id: admin.id } }
-      expect(response).to redirect_to(admin_pages_path)
+      # expect(response).to redirect_to(admin_page_path(page.id))
       expect(flash[:notice]).not_to be_empty
       expect(assigns(:page).title).to eq("Page creation")
     end
