@@ -1,2 +1,17 @@
-<h1>Admin::Pages#index</h1>
-<p>Find me in app/views/admin/pages/index.html.erb</p>
+<% provide(:title, @page_title) %>
+<h1><%= @page_title %></h1>
+<% if @pages.any? %>
+  <div class="pages">
+    <ul>
+      <%= render @pages %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @portfolio_items.any? %>
+  <div class="portfolio_items">
+    <ul>
+      <%= render @portfolio_items %>
+    </ul>
+  </div>
+<% end %>
