@@ -1,6 +1,13 @@
 <% provide(:title, @page.title) %>
 <h1><%= @page.title %></h1>
 <%= raw @page.body %>
+<% if @page.photos.any? %>
+  <% @page.photos.each do |photo| %>
+  <%= photo.title %>
+  <%= image_tag photo.image.url %>
+  <% end %>
+<% end %>
+
 <% if @page.portfolio_item? %>
   <p>This is a Portfolio Item</p>
 <% end %>

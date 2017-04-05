@@ -1,6 +1,7 @@
 class Page < ApplicationRecord
   belongs_to :admin
-  has_many :photos
+  has_many :photos, dependent: :destroy
+  accepts_nested_attributes_for :photos
 
   validates :title, presence: true, length: { minimum: 2 }
   validates :body, presence: true

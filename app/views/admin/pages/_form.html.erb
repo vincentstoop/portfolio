@@ -20,6 +20,15 @@
     Portfolio Item
   <% end  %>
 
+  Photos
+  <%= f.fields_for :photos do |p| %>
+    <%= p.label "Photo title" %>
+    <%= p.text_field :title %>
+
+    <%= p.label :image %>
+    <%= p.file_field :image %>
+  <% end %>
+
   <%= f.submit "Save" %>
 
 <% end %>

@@ -14,6 +14,7 @@ class Admin::PagesController < ApplicationController
   def new
     @page_title = "Add Page"
     @page = Page.new
+    @page.photos.build
   end
 
   def create
@@ -21,6 +22,10 @@ class Admin::PagesController < ApplicationController
     @page.admin = current_admin
 
     if @page.save
+      photo_params.each do |image|
+        debugger
+        @page.photos.create(title: title, image: image, description: description)
+      end
       flash[:notice] = "Page saved."
       redirect_to admin_page_path(@page)
     else
@@ -57,6 +62,10 @@ class Admin::PagesController < ApplicationController
 
     def page_params
       params.require(:page).permit(:title, :body, :portfolio_item, :admin_id)
+    end
+
+    def photo_params
+      params[:photos].present? ? params.require(:photos).permit(:title, :image, :description) : []
     end
 
 end
