@@ -33,6 +33,22 @@ RSpec.feature "AddPages", type: :feature do
         expect(page.title).to include("Portfolio Item")
       end
 
+      it "returns you to a pre filled in form when saving fails" do
+        visit new_admin_page_path
+        expect(page).to have_text("Add Page")
+        expect(page.title).to eq("Add Page")
+        fill_in "page_title", with: 'Failure example'
+        fill_in "page_body", with: ''
+        click_button("Save")
+        expect(page).to have_text("Add Page")
+        expect(page).to have_text("Body can't be blank")
+        expect(page).to have_field("Title", with: "Failure example")
+        expect(page).to have_field("Body", with: "")
+        expect(page).to have_field("Portfolio Item", checked: false)
+      end
+      # a_page = create(:page, admin: admin)
+      # visit edit_admin_page_path(a_page.id)
+
     end
 
   end
