@@ -23,7 +23,6 @@ class Admin::PagesController < ApplicationController
 
     if @page.save
       photo_params.each do |image|
-        debugger
         @page.photos.create(title: title, image: image, description: description)
       end
       flash[:notice] = "Page saved."
@@ -61,11 +60,11 @@ class Admin::PagesController < ApplicationController
   private
 
     def page_params
-      params.require(:page).permit(:title, :body, :portfolio_item, :admin_id)
+      params.require(:page).permit(:title, :body, :portfolio_item, :admin_id, photos_attributes: [:title, :image, :description])
     end
 
     def photo_params
-      params[:photos].present? ? params.require(:photos).permit(:title, :image, :description) : []
+      params[:photos].present? ? params.require(:photos) : []
     end
 
 end

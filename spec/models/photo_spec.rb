@@ -13,8 +13,10 @@ RSpec.describe Photo, type: :model do
     end
 
     describe "title" do
-      it "must be present" do
+      it "must be at least 2 characters long when present" do
         photo.title = ''
+        expect(photo).to be_valid
+        photo.title = 'A'
         expect(photo).not_to be_valid
         photo.title = 'Photo 1'
         expect(photo).to be_valid
@@ -26,7 +28,7 @@ RSpec.describe Photo, type: :model do
         photo.image = ''
         expect(photo).not_to be_valid
       end
-
+      
       it "can only have extensions 'jpg, jpeg, png'" do
         photo.image = File.new(File.join(Rails.root, 'spec', 'support', 'images', 'project.jpg'))
         expect(photo).to be_valid

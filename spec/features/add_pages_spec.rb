@@ -33,6 +33,7 @@ RSpec.feature "AddPages", type: :feature do
           fill_in "page_title", with: "Portfolio Item"
           fill_in "page_body", with: "This is a portfolio item."
           check("page_portfolio_item")
+          fill_in "page_photos_attributes_0_title", with: nil
           click_button("Save")
           expect(page).to have_text("Page saved.")
           expect(page).to have_text("Portfolio Item")
@@ -53,11 +54,7 @@ RSpec.feature "AddPages", type: :feature do
           # debugger
           expect(page).to have_text("Portfolio Item")
           expect(page.title).to include("Portfolio Item")
-          debugger
-          expect(page.body).to have_xpath("//img[contains(@src,'project.jpg')]")
-          # expect(page).to have_selector('img[src*=project.jpg]')
-          # expect(page).to have_css('img')
-          # expect(page).to have_css("img")
+          expect(page.body).to have_xpath "//img[contains(@src,'project.jpg')]", count: 1
         end
 
       end
