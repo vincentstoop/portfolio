@@ -20,18 +20,48 @@ RSpec.feature "AddPages", type: :feature do
 
       before(:each) { log_in_as(admin) }
 
-      it "lets you create a new page" do
-        visit new_admin_page_path
-        expect(page).to have_text("Add Page")
-        expect(page.title).to eq("Add Page")
-        fill_in "page_title", with: "Portfolio Item"
-        fill_in "page_body", with: "This is a portfolio item."
-        check("page_portfolio_item")
-        click_button("Save")
-        expect(page).to have_text("Page saved.")
-        expect(page).to have_text("Portfolio Item")
-        expect(page.title).to include("Portfolio Item")
+      describe "lets you create a page" do
+        let(:image1) { 'project.jpg' }
+        let(:image2) { 'project.png' }
+        let(:path1) { File.join(Rails.root, 'spec', 'support', 'images', image1) }
+        let(:path2) { File.join(Rails.root, 'spec', 'support', 'images', image2) }
+
+        it "without images" do
+          visit new_admin_page_path
+          expect(page).to have_text("Add Page")
+          expect(page.title).to eq("Add Page")
+          fill_in "page_title", with: "Portfolio Item"
+          fill_in "page_body", with: "This is a portfolio item."
+          check("page_portfolio_item")
+          click_button("Save")
+          expect(page).to have_text("Page saved.")
+          expect(page).to have_text("Portfolio Item")
+          expect(page.title).to include("Portfolio Item")
+        end
+
+        it "with an image" do
+          visit new_admin_page_path
+          expect(page).to have_text("Add Page")
+          expect(page.title).to eq("Add Page")
+          fill_in "page_title", with: "Portfolio Item"
+          fill_in "page_body", with: "This is a portfolio item."
+          check("page_portfolio_item")
+          fill_in "page_photos_attributes_0_title", with: "Project Photo"
+          attach_file('Image', path1)
+          click_button("Save")
+          expect(page).to have_text("Page saved.")
+          # debugger
+          expect(page).to have_text("Portfolio Item")
+          expect(page.title).to include("Portfolio Item")
+          debugger
+          expect(page.body).to have_xpath("//img[contains(@src,'project.jpg')]")
+          # expect(page).to have_selector('img[src*=project.jpg]')
+          # expect(page).to have_css('img')
+          # expect(page).to have_css("img")
+        end
+
       end
+
 
       it "returns you to a pre filled in form when saving fails" do
         visit new_admin_page_path
@@ -41,6 +71,7 @@ RSpec.feature "AddPages", type: :feature do
         fill_in "page_body", with: ''
         click_button("Save")
         expect(page).to have_text("Add Page")
+        # debugger
         expect(page).to have_text("Body can't be blank")
         expect(page).to have_field("Title", with: "Failure example")
         expect(page).to have_field("Body", with: "")
