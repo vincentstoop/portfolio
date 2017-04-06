@@ -46,12 +46,15 @@ RSpec.feature "AddPages", type: :feature do
         end
 
         it "with an image" do
-          fill_in "page_photos_attributes_0_title", with: "Project Photo"
-          attach_file('Image', path1)
+          within_fieldset("Photos") do
+            fill_in "Title", with: "Project Photo"
+            attach_file('Image', path1)
+          end
           click_button("Save")
           expect(page).to have_text("Page saved.")
           expect(page).to have_text("Portfolio Item")
           expect(page.title).to include("Portfolio Item")
+          expect(page).to have_text("Project Photo")
           expect(page.body).to have_xpath "//img[contains(@src,'project.jpg')]", count: 1
         end
 

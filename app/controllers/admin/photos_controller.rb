@@ -1,5 +1,8 @@
 class Admin::PhotosController < ApplicationController
   def destroy
-    Photo.find(params[:id]).destroy
+    photo = Photo.find(params[:id])
+    page = photo.page
+    photo.destroy
+    redirect_to admin_page_path(page)
   end
 end

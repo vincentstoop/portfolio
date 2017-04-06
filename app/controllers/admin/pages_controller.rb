@@ -34,7 +34,9 @@ class Admin::PagesController < ApplicationController
   end
 
   def edit
+    @page_title = "Edit Page"
     @page = Page.find(params[:id])
+    @photos = @page.photos
   end
 
   def update
@@ -44,6 +46,7 @@ class Admin::PagesController < ApplicationController
       flash[:notice] = "Page updated."
       redirect_to admin_page_path(@page)
     else
+      @page_title = "Edit Page"
       render :edit
     end
   end
@@ -60,7 +63,7 @@ class Admin::PagesController < ApplicationController
   private
 
     def page_params
-      params.require(:page).permit(:title, :body, :portfolio_item, :admin_id, photos_attributes: [:title, :image, :description])
+      params.require(:page).permit(:title, :body, :portfolio_item, :admin_id, photos_attributes: [:id, :title, :image, :description, :_destroy])
     end
 
     def photo_params

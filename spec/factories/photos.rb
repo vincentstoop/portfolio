@@ -5,6 +5,6 @@ FactoryGirl.define do
     image src_file
     description "MyText"
     title "MyString"
-    page_id { create(:page).id }
+    page { create(:page) }
   end
 end

@@ -1,2 +1,4 @@
-<h1>Admin::Pages#edit</h1>
-<p>Find me in app/views/admin/pages/edit.html.erb</p>
+<% provide(:title, @page_title) %>
+<h1><%= @page_title %></h1>
+
+<%= render 'form' %>
