@@ -1,6 +1,5 @@
 <% if @photos %>
   <% @photos.each do |photo| %>
-    <%= image_tag photo.image %>
-    <%= link_to "Delete", admin_photo_path( photo.id ), class: "btn btn-default", method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= image_tag photo.image, alt: photo.title %>
   <% end %>
 <% end %>

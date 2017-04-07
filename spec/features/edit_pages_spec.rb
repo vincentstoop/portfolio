@@ -36,23 +36,13 @@ RSpec.feature "EditPages", type: :feature do
           expect(page).to have_field("Image")
         end
         expect(page).to have_xpath "//img[contains(@src,'project.jpg')]", count: 1
-        expect(page).to have_link("Delete", href: admin_photo_path(photo.id))
+        expect(page).to have_link("Remove photo", href: '#')
       end
 
       it "lets you update the page" do
-        fill_in "page_title", with: "Image is deleted"
+        fill_in "page_title", with: "New page title"
         click_button("Save")
-        expect(page).to have_selector("h1", text: "Image is deleted")
-      end
-
-      it "lets you delete attached photos" do
-        expect(page).to have_link("Delete", href: admin_photo_path(photo.id))
-        expect { click_link("Delete", href: admin_photo_path(photo.id)) }
-        .to change { Photo.count }
-        .by(-1)
-        expect(current_path).to eq(admin_page_path(page1))
-        expect(page).not_to have_xpath "//img[contains(@src,'project.jpg')]"
-        expect(page).not_to have_link("Delete", href: admin_photo_path(photo.id))  
+        expect(page).to have_selector("h1", text: "New page title")
       end
     end
   end

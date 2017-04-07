@@ -20,20 +20,21 @@
     Portfolio Item
   <% end  %>
 
+
   <%= field_set_tag "Photos" do %>
-    <%= f.fields_for :photos do |p| %>
-      <%= p.label :title %>
-      <%= p.text_field :title %>
 
-      <%= p.label :image %>
-      <%= p.file_field :image %>
-
-      <%= p.label :description %>
-      <%= p.text_area :description %>
-    <% end %>
+    <div id="photos">
+      <div>
+        <%= f.fields_for :photos do |photo| %>
+          <%= render 'photo_fields', f: photo %>
+        <% end %>
+      </div>
+      <div class="links">
+        <%= link_to_add_association 'Add Photo', f, :photos %>
+      </div>
+    </div>
   <% end %>
 
-  <%= render "admin/photos/list" %>
 
   <%= f.submit "Save" %>
 
