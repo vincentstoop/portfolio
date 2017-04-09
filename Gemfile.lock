@@ -271,7 +271,7 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails
   sass-rails!
-  selenium-webdriver
+  selenium-webdriver (~> 3.3)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
