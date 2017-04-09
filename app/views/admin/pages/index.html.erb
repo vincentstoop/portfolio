@@ -11,7 +11,9 @@
 <% if @portfolio_items.any? %>
   <div class="portfolio_items">
     <ul>
-      <%= render @portfolio_items %>
+      <% @portfolio_items.each do |p| %>
+        <%= render 'portfolio_item', portfolio_item: p %>
+      <% end %>
     </ul>
   </div>
 <% end %>
