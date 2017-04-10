@@ -39,12 +39,17 @@ RSpec.feature "SeeIndexOfPages", type: :feature do
         pages.each do |p|
           expect(page).to have_link("Edit", href: edit_admin_page_path(p))
         end
+        click_link("Edit", href: edit_admin_page_path(page2))
+        expect(page).to have_field("Title", with: "Page 2")
       end
 
-      it "has links to delete the different Pages" do
-        pages.each do |p|
-          expect(page).to have_link("Delete", href: admin_page_path(p))
+      it "has links to delete the different Pages", js: true do
+        pages.each do |pagge|
+          expect(page).to have_link("Delete", href: admin_page_path(pagge))
         end
+        click_link("Delete", href: admin_page_path(page3))
+        page.driver.browser.switch_to.alert.accept
+        expect(page).not_to have_text(page3.title)
       end
     end
 
