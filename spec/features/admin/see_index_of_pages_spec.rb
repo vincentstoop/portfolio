@@ -16,7 +16,6 @@ RSpec.feature "SeeIndexOfPages", type: :feature do
         visit admin_pages_path
         expect(current_path).to eq(new_admin_session_path)
         expect(page).to have_text("Log in")
-        # expect(page).not_to have_text("Add Page")
       end
 
     end
