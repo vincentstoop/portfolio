@@ -19,11 +19,10 @@ RSpec.feature "EditPages", type: :feature do
     end
 
     context "when logged in" do
-      before(:each) {
+      before(:example) do
         log_in_as(admin)
-
         visit edit_admin_page_path(page1)
-      }
+      end
 
       it "shows you a pre filled in edit page" do
         expect(page.title).to eq("Edit Page")
@@ -35,8 +34,13 @@ RSpec.feature "EditPages", type: :feature do
           expect(page).to have_field("Description", with: "MyText")
           expect(page).to have_field("Image")
         end
-        expect(page).to have_xpath "//img[contains(@src,'project.jpg')]", count: 1
-        expect(page).to have_link("Remove photo", href: '#')
+        expect(page).to have_selector('.nested-fields', visible: true, count: 1)
+        within(:css, '.nested-fields') do
+          expect(page).to have_xpath "//img[contains(@src,'project.jpg')]", count: 1
+          expect(page).to have_link("Remove photo", href: '#')
+          click_link("Remove photo", href: '#')
+        end
+        expect(page).to have_selector('.nested-fields', visible: false)
       end
 
       it "lets you update the page" do

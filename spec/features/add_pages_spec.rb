@@ -18,12 +18,12 @@ RSpec.feature "AddPages", type: :feature do
 
     context "when logged in" do
 
-      before(:each) {
+      before(:example) do
         log_in_as(admin)
         visit new_admin_page_path
         expect(page).to have_text("Add Page")
         expect(page.title).to eq("Add Page")
-      }
+      end
 
       let(:image1) { 'project.jpg' }
       let(:image2) { 'project.png' }
@@ -32,11 +32,11 @@ RSpec.feature "AddPages", type: :feature do
 
       describe "lets you create a page" do
 
-        before(:each) {
+        before(:example) do
           fill_in "page_title", with: "Portfolio Item"
           fill_in "page_body", with: "This is a portfolio item."
           check("page_portfolio_item")
-        }
+        end
 
         it "without images" do
           click_button("Save")

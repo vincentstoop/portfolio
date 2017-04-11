@@ -4,7 +4,7 @@ RSpec.describe Admin::PagesController, type: :controller do
   let(:page) { create(:page, title: 'Test PagesController') }
   let(:admin) { page.admin }
 
-  before(:each) do
+  before(:example) do
     @request.env["devise.mapping"] = Devise.mappings[:admin2]
     admin2 = page.admin
     sign_in admin2, scope: :admin # sign_in(scope, resource)

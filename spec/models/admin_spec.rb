@@ -5,11 +5,15 @@ RSpec.describe Admin, type: :model do
     let(:admin) { build(:admin) }
 
     describe "factory" do
+
       it "is valid" do
         expect(admin).to be_valid
       end
+
     end
+
     describe "name" do
+
       it "must be present" do
         expect(admin).to be_valid
         admin.name = ''
@@ -21,6 +25,7 @@ RSpec.describe Admin, type: :model do
         admin.name = 'A'
         expect(admin).not_to be_valid
       end
+      
     end
   end
 end
