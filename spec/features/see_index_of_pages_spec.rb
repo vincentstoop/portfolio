@@ -22,10 +22,10 @@ RSpec.feature "SeeIndexOfPages", type: :feature do
     end
 
     context "when logged in" do
-      before(:each) {
+      before(:example) do
         log_in_as(admin)
         visit admin_pages_path
-      }
+      end
 
       it "shows you the Pages index, with links to those pages" do
         expect(current_path).to eq(admin_pages_path)
