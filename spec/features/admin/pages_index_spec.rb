@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "SeeIndexOfPages", type: :feature do
+RSpec.feature "PagesIndex", type: :feature do
   let(:admin) { create(:admin) }
   let!(:page1) { create(:page, admin: admin, title: "Page 1") }
   let!(:page2) { create(:page, admin: admin, title: "Page 2") }
@@ -32,6 +32,10 @@ RSpec.feature "SeeIndexOfPages", type: :feature do
         pages.each do |p|
           expect(page).to have_link(p.title, href: admin_page_path(p))
         end
+      end
+
+      it "has a link to add a new Page" do
+        expect(page).to have_link("Add Page", href: new_admin_page_path)
       end
 
       it "has links to edit the different Pages" do
