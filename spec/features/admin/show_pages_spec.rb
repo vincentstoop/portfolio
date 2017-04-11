@@ -32,7 +32,9 @@ RSpec.feature "ShowPage", type: :feature do
         expect(page).to have_link("Edit", href: edit_admin_page_path(page1))
       end
 
-      it "has a link to delete the page"
+      it "has a link to delete the page" do
+        expect(page).to have_link("Delete", href: admin_page_path(page1))
+      end
 
     end
 
