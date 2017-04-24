@@ -1,5 +1,8 @@
 Page.delete_all
 PortfolioItem.delete_all
+Admin.delete_all
+
+Admin.create(email: "vincent@stoop.nl", password: "abcd1234", password_confirmation: "abcd1234")
 
 PortfolioItem.create!(title: "PortfolioItem 1", body: "Echo park chia pour-over, tattooed keffiyeh letterpress franzen hella enamel pin slow-carb. Subway tile you probably haven't heard of them paleo marfa dreamcatcher. Tousled af whatever everyday carry heirloom. Jianbing bitters direct trade, ethical gentrify pop-up semiotics copper mug fap try-hard umami deep v hell of chicharrones. Succulents salvia cred, ramps swag freegan affogato kogi offal cronut gastropub hell of aesthetic fixie ugh. Cold-pressed mlkshk synth hell of. Put a bird on it bicycle rights live-edge drinking vinegar, YOLO crucifix banh mi VHS.", portfolio_item: true, published: true)
 PortfolioItem.create!(title: "PortfolioItem 2", body: "Spicy jalapeno bacon ipsum dolor amet doner hamburger t-bone proident, porchetta tri-tip eu short ribs ullamco incididunt voluptate minim exercitation shoulder chuck. Qui ham irure pig, pancetta chicken adipisicing labore short ribs quis meatloaf minim flank. Ut tenderloin ex lorem strip steak enim fatback cupim. Ground round pork qui, kevin nostrud id flank pariatur ad pork loin pork chop chicken.", portfolio_item: true, published: true)
