@@ -1,0 +1,10 @@
+<h1><%= p.title %></h1>
+<p><%= p.body %></p>
+<% if p.images.any? %>
+  <% p.images.each do |image| %>
+    <%= image_tag image.image, alt: image.title %>
+    <% if(image.description.present?) %>
+      <p><%= image.description %></p>
+    <% end %>
+  <% end %>
+<% end %>
