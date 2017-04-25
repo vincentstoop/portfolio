@@ -1,0 +1,7 @@
+<%= simple_form_for [:admin, p], html: { multipart: true } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :body %>
+  <%= f.label "pb", for: 'portfolio_item_published'  %>
+  <%= f.check_box :published %>
+  <%= f.submit %>
+<% end %>
