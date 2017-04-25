@@ -1,0 +1,5 @@
+<h1>Edit Page</h1>
+
+<%= render 'admin/shared/form', p: @page %>
+
+<%= link_to "Delete", admin_page_path(@page), method: :delete, data: { confirm: 'Are you sure?' } %>
