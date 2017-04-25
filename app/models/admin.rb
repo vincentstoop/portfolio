@@ -4,4 +4,7 @@ class Admin < ApplicationRecord
   # and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :docs
+  has_many :portfolio_items
 end

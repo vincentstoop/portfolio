@@ -3,5 +3,14 @@
   <%= f.input :body %>
   <%= f.label "pb", for: 'portfolio_item_published'  %>
   <%= f.check_box :published %>
+  <div id="images">
+    <%= f.simple_fields_for :images do |image| %>
+      <%= render 'image_fields', f: image %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add image', f, :images %>
+    </div>
+  </div>
+
   <%= f.submit %>
 <% end %>
