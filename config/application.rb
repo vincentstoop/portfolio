@@ -19,6 +19,9 @@ Bundler.require(*Rails.groups)
 module PF
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+
+    # config.autoload_paths += %W(#{config.root}/app/models/docs)
+
     config.load_defaults 5.1
 
     # Settings in config/environments/* take precedence over those specified here.
