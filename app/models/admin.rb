@@ -7,4 +7,5 @@ class Admin < ApplicationRecord
 
   has_many :docs
   has_many :portfolio_items
+  has_many :pages
 end
