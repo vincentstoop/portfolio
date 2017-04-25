@@ -1,0 +1,5 @@
+<h1>Edit Portfolio Item</h1>
+
+<%= render 'admin/shared/form', p: @portfolio_item %>
+
+<%= link_to "Delete", admin_portfolio_item_path(@portfolio_item), method: :delete, data: { confirm: 'Are you sure?' } %>

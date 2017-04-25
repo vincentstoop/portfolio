@@ -1,5 +1,5 @@
 class Admin::PortfolioItemsController < Admin::BaseController
-  before_action :set_portfolio_item, only: [:show, :edit, :update]
+  before_action :set_portfolio_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @portfolio_items = PortfolioItem.all
@@ -40,6 +40,12 @@ class Admin::PortfolioItemsController < Admin::BaseController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @portfolio_item.destroy
+    flash[:notice] = 'PortfolioItem deleted.'
+    redirect_to admin_portfolio_items_path
   end
 
   private
