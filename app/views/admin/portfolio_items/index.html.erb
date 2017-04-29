@@ -1,3 +1,1 @@
-<% @portfolio_items.each do |p| %>
-  <p><%= link_to p.title, admin_portfolio_item_path(p)  %></p>
-<% end %>
+<%= render 'admin/docs/table', p: @portfolio_items %>

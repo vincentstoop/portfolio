@@ -1,3 +1,1 @@
-<% @pages.each do |p| %>
-  <p><%= link_to p.title, admin_page_path(p)  %></p>
-<% end %>
+<%= render 'admin/docs/table', p: @pages %>

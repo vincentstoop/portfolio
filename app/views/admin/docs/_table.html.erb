@@ -1,0 +1,17 @@
+<h2 class="sub-header"><%= (p.first.class).to_s.pluralize %></h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th style="width:60%;">Title</th>
+        <th>Created</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render 'admin/docs/document', p: p %>
+    </tbody>
+  </table>
+</div>

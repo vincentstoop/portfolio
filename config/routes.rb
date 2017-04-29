@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin
   namespace :admin do
+    resources :docs, only: [:index, :update]
     resources :pages
     resources :portfolio_items
   end
