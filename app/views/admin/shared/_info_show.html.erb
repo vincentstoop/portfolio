@@ -8,3 +8,4 @@
     <% end %>
   <% end %>
 <% end %>
+<%= link_to "Edit", Rails.application.routes.url_helpers.send("edit_admin_#{p.class.name.underscore.downcase}_path", p) %>

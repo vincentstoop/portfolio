@@ -1,10 +1,10 @@
 <% p.each do |p| %>
 <tr>
   <td><%= p.id %></td>
-  <td><%= p.title %></td>
+  <td><%= link_to p.title, Rails.application.routes.url_helpers.send("admin_#{p.class.name.underscore.downcase}_path", p) %></td>
   <td><%= p.created_at %></td>
   <td><%= link_to p.published? ? 'Published' : 'Unpublished', admin_doc_path(p), method: :patch %></td>
-  <td><%= link_to "Edit", (p.class.to_s.underscore) + "s/#{p.id}/edit" %></td>
+  <td><%= link_to "Edit", Rails.application.routes.url_helpers.send("edit_admin_#{p.class.name.underscore.downcase}_path", p) %></td>
 </tr>
 
 <% end %>
